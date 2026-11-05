@@ -8,23 +8,46 @@ import kotlin.test.assertNull
 class REndingTest {
     @Test
     fun appendsLowercaseR() {
-        assertEquals("casar", appendTo("casa"))
-        assertEquals("falarr", appendTo("falar"))
+        assertEquals("casar", applyTo("casa"))
+        assertEquals("falarr", applyTo("falar"))
+        assertEquals("pãor", applyTo("pão"))
+        assertEquals("manhãr", applyTo("manhã"))
     }
 
     @Test
     fun preservesUppercaseWords() {
-        assertEquals("CASAR", appendTo("CASA"))
-        assertEquals("Casar", appendTo("Casa"))
-        assertEquals("casar", appendTo("casa"))
+        assertEquals("CASAR", applyTo("CASA"))
+        assertEquals("Casar", applyTo("Casa"))
+        assertEquals("casar", applyTo("casa"))
+    }
+
+    @Test
+    fun handlesFinalM() {
+        assertEquals("benher", applyTo("bem"))
+        assertEquals("Benher", applyTo("Bem"))
+        assertEquals("BENHER", applyTo("BEM"))
+        assertEquals("tambénher", applyTo("também"))
+        assertEquals("homenher", applyTo("homem"))
+        assertEquals("falanher", applyTo("falam"))
+    }
+
+    @Test
+    fun addsEToOtherFinalConsonants() {
+        assertEquals("Brasiler", applyTo("Brasil"))
+        assertEquals("felizer", applyTo("feliz"))
+        assertEquals("maser", applyTo("mas"))
+        assertEquals("parabénser", applyTo("parabéns"))
+        assertEquals("hífener", applyTo("hífen"))
+        assertEquals("tóraxer", applyTo("tórax"))
+        assertEquals("player", applyTo("play"))
     }
 
     @Test
     fun ignoresNonWordsAndEmptyStrings() {
-        assertNull(appendTo(""))
-        assertNull(appendTo("123"))
-        assertNull(appendTo("..."))
-        assertNull(appendTo("casa."))
-        assertNull(appendTo("🙂"))
+        assertNull(applyTo(""))
+        assertNull(applyTo("123"))
+        assertNull(applyTo("..."))
+        assertNull(applyTo("casa."))
+        assertNull(applyTo("🙂"))
     }
 }

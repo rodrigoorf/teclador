@@ -280,6 +280,30 @@ class InputLogicTest {
         assertEquals("casa ", text)
     }
 
+    @Test fun appendRHandlesNasalEnding() {
+        latinIME.prefs().edit {
+            putBoolean(Settings.PREF_AUTO_CORRECTION, false)
+            putBoolean(Settings.PREF_R_ENDING, true)
+        }
+        setText("")
+        chainInput("bem")
+        latinIME.onEvent(Event.createEventForCodePointFromUnknownSource(Constants.CODE_SPACE))
+        handleMessages()
+        assertEquals("benher ", text)
+    }
+
+    @Test fun appendRHandlesConsonantEnding() {
+        latinIME.prefs().edit {
+            putBoolean(Settings.PREF_AUTO_CORRECTION, false)
+            putBoolean(Settings.PREF_R_ENDING, true)
+        }
+        setText("")
+        chainInput("Brasil")
+        latinIME.onEvent(Event.createEventForCodePointFromUnknownSource(Constants.CODE_SPACE))
+        handleMessages()
+        assertEquals("Brasiler ", text)
+    }
+
     @Test fun autospaceButWithTextAfter() {
         setText("hello there")
         setCursorPosition(5) // after hello

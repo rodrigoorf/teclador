@@ -2384,7 +2384,7 @@ public final class InputLogic {
         }
         // Joke feature: append an R before the separator. Keep the dictionary/history entry
         // untouched, so suggestions still learn the word the user actually typed.
-        final String wordWithREnding = settingsValues.mREndingEnabled ? REnding.appendTo(chosenWord) : null;
+        final String wordWithREnding = settingsValues.mREndingEnabled ? REnding.applyTo(chosenWord) : null;
         final String committedWord = wordWithREnding != null ? wordWithREnding : chosenWord;
         // essentially reverted https://github.com/lineageos/android_packages_inputmethods_LatinIME/commit/ee6de1466bc98e27bd414c9a7451f2aee3f9e721
         // can't find any drawback (performance, neither when setting nor when reading)

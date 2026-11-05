@@ -3,17 +3,36 @@
 
 package helium314.keyboard.latin.utils
 
+// Portuguese vowels, including accented forms. Final "y" is treated as a consonant so that
+// words like "play" become "player".
+private const val VOWELS = "aeiouáàâãäéèêëíìîïóòôõöúùûüý"
+
+// Consonants that need an epenthetic "e" before the R to stay pronounceable.
+private const val CONSONANTS = "bcdfghjklmnpqrstvwxyzç"
+
 /**
- * Returns [word] with the joke "R" appended, or null when no R should be appended.
+ * Returns [word] with the joke "R" ending, or null when [word] does not end with a letter.
  *
- * The R is only appended to words that end with a letter. Words that are entirely uppercase get
- * an uppercase R; everything else gets a lowercase r. This deliberately does not special-case
- * words that already end in R, so "falar" becomes "falarr".
+ * Most words get an "r" appended. A few Portuguese endings get a small adjustment so the result
+ * is easier to read out loud:
+ * - final "m" becomes "nher" ("bem" -> "benher", "também" -> "tambénher");
+ * - other final consonants get "er" ("Brasil" -> "Brasiler", "feliz" -> "felizer");
+ * - final "r" gets another "r" ("falar" -> "falarr");
+ * - final vowels get "r" ("casa" -> "casar").
+ *
+ * All-uppercase words use uppercase replacements ("BEM" -> "BENHER").
  */
-fun appendTo(word: String): String? {
+fun applyTo(word: String): String? {
     if (word.isEmpty() || !word.last().isLetter()) return null
     val letters = word.filter { it.isLetter() }
     if (letters.isEmpty()) return null
-    val r = if (letters.all { it.isUpperCase() }) 'R' else 'r'
-    return word + r
+    val allCaps = letters.all { it.isUpperCase() }
+    val last = word.last().lowercaseChar()
+    return when {
+        last == 'm' -> word.dropLast(1) + if (allCaps) "NHER" else "nher"
+        last == 'r' -> word + if (allCaps) 'R' else 'r'
+        last in VOWELS -> word + if (allCaps) 'R' else 'r'
+        last in CONSONANTS -> word + if (allCaps) "ER" else "er"
+        else -> word + if (allCaps) 'R' else 'r'
+    }
 }

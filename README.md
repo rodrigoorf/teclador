@@ -9,6 +9,8 @@ Examples:
 | `house` + space | `houser ` |
 | `house.` | `houser.` |
 | `falar` | `falarr` |
+| `bem` | `benher` |
+| `Brasil` | `Brasiler` |
 | `CASA` | `CASAR` |
 | `Casa` | `Casar` |
 
@@ -18,12 +20,23 @@ The project is a fork of [HeliBoard](https://github.com/HeliBorg/HeliBoard), a p
 
 ## How it works
 
-- The R is inserted when the word is committed, so it works for typed words, auto-corrections, and manually picked suggestions.
-- If the word already ends in R, another R is appended: `falar` → `falarr`.
-- All-uppercase words get an uppercase `R`; everything else gets a lowercase `r`.
+- The R ending is applied when the word is committed, so it works for typed words, auto-corrections, and manually picked suggestions.
+- All-uppercase words get uppercase replacements; everything else gets lowercase ones.
 - Backspace deletes normally; the R is not treated as a revertible auto-correction.
 - Dictionary and history learning still use the original word, without the R.
 - The feature is automatically disabled in sensitive fields: passwords, e-mail, URLs, numbers, and similar.
+
+### Portuguese endings
+
+Simply appending R to every word creates hard-to-read results like `bemr` or `Brasilr`. The keyboard applies a few small rules based on the final letter:
+
+| Word ending | Rule | Examples |
+| --- | --- | --- |
+| vowel or `r` | append `r` | `casa` → `casar`, `pão` → `pãor`, `falar` → `falarr` |
+| `m` | replace `m` with `nher` | `bem` → `benher`, `também` → `tambénher`, `homem` → `homenher` |
+| other consonants (`s`, `l`, `z`, `x`, `n`, ...) | append `er` | `mas` → `maser`, `Brasil` → `Brasiler`, `feliz` → `felizer`, `parabéns` → `parabénser` |
+
+Words that do not end in a letter (numbers, punctuation, emoji) are left untouched. The rules live in [`REnding.kt`](app/src/main/java/helium314/keyboard/latin/utils/REnding.kt) and are easy to adjust or extend.
 
 ## Settings
 
