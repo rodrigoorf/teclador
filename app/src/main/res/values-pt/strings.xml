@@ -28,6 +28,8 @@
     <string name="main_dictionary">"Dicionário principal"</string>
     <string name="prefs_show_suggestions">"Mostrar sugestões de correção"</string>
     <string name="prefs_show_suggestions_summary">"Exibir sugestões de palavras durante a digitação"</string>
+    <string name="prefs_r_ending_title">"Adicionar R no final das palavras (brincadeira)"</string>
+    <string name="prefs_r_ending_summary">"Adiciona um R no final de cada palavra, antes da pontuação. Desativado em campos de senha, e-mail, URL e números."</string>
     <string name="prefs_block_potentially_offensive_title">"Bloquear palavras ofensivas"</string>
     <string name="prefs_block_potentially_offensive_summary">"Não sugerir palavras potencialmente ofensivas"</string>
     <string name="autocorrect">"Correção automática"</string>
@@ -91,8 +93,8 @@
     <string name="user_dict_settings_edit_dialog_title">"Editar palavra"</string>
     <string name="user_dict_settings_all_languages">"Para todos os idiomas"</string>
     <string name="user_dict_settings_more_languages">"Mais idiomas…"</string>
-    <string name="spell_checker_service_name">Verificação ortográfica HeliBoard</string>
-    <string name="android_spell_checker_settings">Definições de verificação ortográfica HeliBoard</string>
+    <string name="spell_checker_service_name">Verificação ortográfica Teclador</string>
+    <string name="android_spell_checker_settings">Definições de verificação ortográfica Teclador</string>
     <string name="number_row">Número de linha</string>
     <string name="number_row_summary">Mostrar sempre n.º de linha</string>
     <string name="prefs_force_incognito_mode_summary">Desativar aprendizagem de palavras</string>
@@ -102,7 +104,7 @@
     <string name="settings_category_experimental">Experimental</string>
     <string name="settings_category_input">Introdução</string>
     <string name="settings_category_miscellaneous">Outras</string>
-    <string name="ime_settings">Definições HeliBoard</string>
+    <string name="ime_settings">Definições do Teclador</string>
     <string name="settings_category_suggestions">Sugestões</string>
     <string name="delete_swipe">Deslize para eliminar</string>
     <string name="more_keys_strip_description">Mais teclas</string>

@@ -4,7 +4,7 @@
     modified
     SPDX-License-Identifier: Apache-2.0 AND GPL-3.0-only
 --><resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" xmlns:tools="http://schemas.android.com/tools">
-    <string name="ime_settings">Configurações do HeliBoard</string>
+    <string name="ime_settings">Configurações do Teclador</string>
     <string name="vibrate_on_keypress">Vibrar ao tocar nas teclas</string>
     <string name="sound_on_keypress">Som ao tocar nas teclas</string>
     <string name="settings_screen_gesture">Digitação por gestos</string>
@@ -23,6 +23,8 @@
     <string name="use_double_space_period_summary">Tocar duas vezes na barra de espaço insere um ponto seguido por um espaço</string>
     <string name="auto_cap">Maiúsculas automáticas</string>
     <string name="auto_cap_summary">Começar cada palavra de cada frase com letra maiúscula</string>
+    <string name="prefs_r_ending_title">Adicionar R no final das palavras (brincadeira)</string>
+    <string name="prefs_r_ending_summary">Adiciona um R no final de cada palavra, antes da pontuação. Desativado em campos de senha, e-mail, URL e números.</string>
     <string name="prefs_block_potentially_offensive_title">Bloquear palavras ofensivas</string>
     <string name="prefs_block_potentially_offensive_summary">Não sugerir palavras potencialmente ofensivas</string>
     <string name="autocorrect">Correção automática</string>

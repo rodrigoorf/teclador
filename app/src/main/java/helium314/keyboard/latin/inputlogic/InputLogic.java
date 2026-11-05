@@ -66,6 +66,7 @@ import helium314.keyboard.latin.utils.GestureDataGatheringKt;
 import helium314.keyboard.latin.utils.InputTypeUtils;
 import helium314.keyboard.latin.utils.IntentUtils;
 import helium314.keyboard.latin.utils.Log;
+import helium314.keyboard.latin.utils.REnding;
 import helium314.keyboard.latin.utils.BackgroundGatheringCache;
 import helium314.keyboard.latin.utils.RecapitalizeMode;
 import helium314.keyboard.latin.utils.RecapitalizeStatus;
@@ -2381,9 +2382,13 @@ public final class InputLogic {
             startTimeMillis = SystemClock.elapsedRealtime();
             Log.d(TAG, "commitChosenWord() : [" + chosenWord + "]");
         }
+        // Joke feature: append an R before the separator. Keep the dictionary/history entry
+        // untouched, so suggestions still learn the word the user actually typed.
+        final String wordWithREnding = settingsValues.mREndingEnabled ? REnding.appendTo(chosenWord) : null;
+        final String committedWord = wordWithREnding != null ? wordWithREnding : chosenWord;
         // essentially reverted https://github.com/lineageos/android_packages_inputmethods_LatinIME/commit/ee6de1466bc98e27bd414c9a7451f2aee3f9e721
         // can't find any drawback (performance, neither when setting nor when reading)
-        final CharSequence chosenWordWithSuggestions = getTextWithSuggestionSpan(mLatinIME, chosenWord,
+        final CharSequence chosenWordWithSuggestions = getTextWithSuggestionSpan(mLatinIME, committedWord,
                 mSuggestedWords, getDictionaryFacilitatorLocale());
         if (DebugFlags.DEBUG_ENABLED) {
             long runTimeMillis = SystemClock.elapsedRealtime() - startTimeMillis;
@@ -2428,7 +2433,12 @@ public final class InputLogic {
         // what user typed. Note: currently this is done much later in
         // LastComposedWord#didCommitTypedWord by string equality of the remembered
         // strings.
-        mLastComposedWord = mWordComposer.commitWord(commitType, chosenWord, separatorString, ngramContext);
+        mLastComposedWord = mWordComposer.commitWord(commitType, committedWord, separatorString, ngramContext);
+        if (wordWithREnding != null) {
+            // The R is intentional, so a backspace right after the commit should delete the
+            // separator/word normally instead of reverting it like an auto-correction.
+            mLastComposedWord.deactivate();
+        }
         if (DebugFlags.DEBUG_ENABLED) {
             long runTimeMillis = SystemClock.elapsedRealtime() - startTimeMillis;
             Log.d(TAG, "commitChosenWord() : " + runTimeMillis + " ms to run "

@@ -219,6 +219,67 @@ class InputLogicTest {
         assertEquals("hello. a", textBeforeCursor)
     }
 
+    @Test fun appendRWhenCommittingWord() {
+        latinIME.prefs().edit {
+            putBoolean(Settings.PREF_AUTO_CORRECTION, false)
+            putBoolean(Settings.PREF_R_ENDING, true)
+        }
+        setText("")
+        chainInput("casa")
+        latinIME.onEvent(Event.createEventForCodePointFromUnknownSource(Constants.CODE_SPACE))
+        handleMessages()
+        assertEquals("casar ", text)
+        checkConnectionConsistency()
+    }
+
+    @Test fun appendRUsesCaseOfWord() {
+        latinIME.prefs().edit {
+            putBoolean(Settings.PREF_AUTO_CORRECTION, false)
+            putBoolean(Settings.PREF_R_ENDING, true)
+        }
+        setText("")
+        chainInput("CASA")
+        latinIME.onEvent(Event.createEventForCodePointFromUnknownSource(Constants.CODE_SPACE))
+        handleMessages()
+        assertEquals("CASAR ", text)
+    }
+
+    @Test fun appendRGoesBeforePunctuation() {
+        latinIME.prefs().edit {
+            putBoolean(Settings.PREF_AUTO_CORRECTION, false)
+            putBoolean(Settings.PREF_R_ENDING, true)
+        }
+        setText("")
+        chainInput("casa")
+        latinIME.onEvent(Event.createEventForCodePointFromUnknownSource(Constants.CODE_PERIOD))
+        handleMessages()
+        assertEquals("casar.", text)
+    }
+
+    @Test fun appendRCanBeDisabled() {
+        latinIME.prefs().edit {
+            putBoolean(Settings.PREF_AUTO_CORRECTION, false)
+            putBoolean(Settings.PREF_R_ENDING, false)
+        }
+        setText("")
+        chainInput("casa")
+        latinIME.onEvent(Event.createEventForCodePointFromUnknownSource(Constants.CODE_SPACE))
+        handleMessages()
+        assertEquals("casa ", text)
+    }
+
+    @Test fun appendRIsDisabledInPasswordFields() {
+        latinIME.prefs().edit {
+            putBoolean(Settings.PREF_AUTO_CORRECTION, false)
+            putBoolean(Settings.PREF_R_ENDING, true)
+        }
+        setInputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
+        chainInput("casa")
+        latinIME.onEvent(Event.createEventForCodePointFromUnknownSource(Constants.CODE_SPACE))
+        handleMessages()
+        assertEquals("casa ", text)
+    }
+
     @Test fun autospaceButWithTextAfter() {
         setText("hello there")
         setCursorPosition(5) // after hello
@@ -731,8 +792,12 @@ class InputLogicTest {
         ShadowInputMethodService.reset()
         lastAddedWord = ""
 
-        // reset settings
-        latinIME.prefs().edit { clear() }
+        // reset settings; the joke R feature is opt-in for tests so the other tests keep their
+        // expected text
+        latinIME.prefs().edit {
+            clear()
+            putBoolean(Settings.PREF_R_ENDING, false)
+        }
 
         setText("") // (re)sets selection and composing word
     }

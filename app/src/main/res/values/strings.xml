@@ -9,11 +9,11 @@
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2"
     tools:ignore="MissingTranslation">
     <!-- Name of Android spell checker service. The app name should not be translated. -->
-    <string name="spell_checker_service_name">HeliBoard Spell Checker</string>
+    <string name="spell_checker_service_name">Teclador Spell Checker</string>
     <!-- Title for IME settings screen. The app name should not be translated. -->
-    <string name="ime_settings">HeliBoard Settings</string>
+    <string name="ime_settings">Teclador Settings</string>
     <!-- Title for the spell checking service settings screen. The app name should not be translated. -->
-    <string name="android_spell_checker_settings">HeliBoard Spell Checker Settings</string>
+    <string name="android_spell_checker_settings">Teclador Spell Checker Settings</string>
     <!-- Option to provide vibrate/haptic feedback on keypress -->
     <string name="vibrate_on_keypress">Vibrate on keypress</string>
     <!-- Option to provide vibrate/haptic feedback on keypress even in do not disturb mode -->
@@ -130,6 +130,10 @@
     <string name="prefs_always_show_suggestions_except_web_text">Don’t always show suggestions for web edit fields</string>
     <!-- Description for prefs_always_show_suggestions_except_web_text -->
     <string name="prefs_always_show_suggestions_except_web_text_summary">Web edit fields (mostly found in browsers) are a very common cause for issues with the always show suggestions setting</string>
+    <!-- Joke option: append an R to the end of every word -->
+    <string name="prefs_r_ending_title">Add R to every word (joke)</string>
+    <!-- Description for the joke R option -->
+    <string name="prefs_r_ending_summary">Appends an R to the end of each word before punctuation. Disabled in password, e-mail, URL, and number fields.</string>
     <!-- Option to block potentially offensive words to be shown -->
     <string name="prefs_block_potentially_offensive_title">Block offensive words</string>
     <!-- Summary for option to block potentially offensive words to be shown -->

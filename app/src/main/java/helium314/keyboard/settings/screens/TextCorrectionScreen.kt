@@ -61,6 +61,7 @@ fun TextCorrectionScreen(
     val items = listOf(
         SettingsWithoutKey.EDIT_PERSONAL_DICTIONARY,
         R.string.settings_category_correction,
+        Settings.PREF_R_ENDING,
         Settings.PREF_BLOCK_POTENTIALLY_OFFENSIVE,
         Settings.PREF_AUTO_CORRECTION,
         if (autocorrectEnabled) Settings.PREF_MORE_AUTO_CORRECTION else null,
@@ -110,6 +111,11 @@ fun createCorrectionSettings(context: Context) = listOf(
             name = stringResource(R.string.edit_personal_dictionary),
             onClick = { SettingsDestination.navigateTo(SettingsDestination.PersonalDictionaries) },
         ) { NextScreenIcon() }
+    },
+    Setting(context, Settings.PREF_R_ENDING,
+        R.string.prefs_r_ending_title, R.string.prefs_r_ending_summary
+    ) {
+        SwitchPreference(it, Defaults.PREF_R_ENDING)
     },
     Setting(context, Settings.PREF_BLOCK_POTENTIALLY_OFFENSIVE,
         R.string.prefs_block_potentially_offensive_title, R.string.prefs_block_potentially_offensive_summary

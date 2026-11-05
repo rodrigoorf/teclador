@@ -166,6 +166,7 @@ public class SettingsValues {
     // Deduced settings
     public final boolean mSuggestionStripHiddenPerUserSettings;
     public final boolean mAutoCorrectEnabled;
+    public final boolean mREndingEnabled;
     public final float mAutoCorrectionThreshold;
     public final int mScoreLimitForAutocorrect;
     public final SettingsValuesForSuggestion mSettingsValuesForSuggestion;
@@ -225,6 +226,10 @@ public class SettingsValues {
         mAutoCorrectEnabled = mAutoCorrectionEnabledPerUserSettings
                 && (mInputAttributes.mInputTypeShouldAutoCorrect || prefs.getBoolean(Settings.PREF_MORE_AUTO_CORRECTION, Defaults.PREF_MORE_AUTO_CORRECTION))
                 && (mUrlDetectionEnabled || !InputTypeUtils.isUriOrEmailType(mInputAttributes.mInputType));
+        // Joke feature: append an R to the end of every word. Keep it out of sensitive or
+        // non-prose fields (passwords, e-mail, URLs, numbers, etc.).
+        mREndingEnabled = prefs.getBoolean(Settings.PREF_R_ENDING, Defaults.PREF_R_ENDING)
+                && mInputAttributes.mIsGeneralTextInput;
         mCenterSuggestionTextToEnter = prefs.getBoolean(Settings.PREF_CENTER_SUGGESTION_TEXT_TO_ENTER, Defaults.PREF_CENTER_SUGGESTION_TEXT_TO_ENTER);
         float autoCorrectConfidence = prefs.getFloat(Settings.PREF_AUTO_CORRECT_CONFIDENCE, Defaults.PREF_AUTO_CORRECT_CONFIDENCE);
         // confidence -> threshold and score limit are just some formulas that give something similar to the old values, so that confidence can be in a nice 0-1 range
