@@ -1,45 +1,45 @@
 # Teclador
 
-Teclador é um teclado Android de brincadeira: ele adiciona um **R** ao final de cada palavra, sempre antes da pontuação.
+Teclador is a joke Android keyboard: it appends an **R** to the end of every word, always before punctuation.
 
-Exemplos:
+Examples:
 
-| Você digita | O Teclador escreve |
+| You type | Teclador writes |
 | --- | --- |
-| `casa` + espaço | `casar ` |
-| `casa.` | `casar.` |
+| `house` + space | `houser ` |
+| `house.` | `houser.` |
 | `falar` | `falarr` |
 | `CASA` | `CASAR` |
 | `Casa` | `Casar` |
 
-O projeto é um fork do [HeliBoard](https://github.com/HeliBorg/HeliBoard), um teclado open-source, privado e offline baseado no AOSP/OpenBoard.
+The project is a fork of [HeliBoard](https://github.com/HeliBorg/HeliBoard), a privacy-conscious, offline, open-source keyboard based on AOSP/OpenBoard.
 
-> **Aviso:** este app é uma piada. Não é afiliado ao HeliBoard nem ao OpenBoard.
+> **Disclaimer:** this app is a joke. It is not affiliated with HeliBoard or OpenBoard.
 
-## Como funciona
+## How it works
 
-- O R é inserido no momento em que a palavra é confirmada, então funciona com palavras digitadas, auto-correção e sugestões escolhidas manualmente.
-- Se a palavra já termina em R, entra outro R: `falar` → `falarr`.
-- Palavras totalmente em maiúsculas recebem `R`; as demais recebem `r`.
-- O backspace apaga normalmente; o R não é tratado como uma auto-correção reversível.
-- O dicionário e o histórico continuam aprendendo a palavra original, sem o R.
-- O recurso é desativado automaticamente em campos sensíveis: senha, e-mail, URL, números e afins.
+- The R is inserted when the word is committed, so it works for typed words, auto-corrections, and manually picked suggestions.
+- If the word already ends in R, another R is appended: `falar` → `falarr`.
+- All-uppercase words get an uppercase `R`; everything else gets a lowercase `r`.
+- Backspace deletes normally; the R is not treated as a revertible auto-correction.
+- Dictionary and history learning still use the original word, without the R.
+- The feature is automatically disabled in sensitive fields: passwords, e-mail, URLs, numbers, and similar.
 
-## Configuração
+## Settings
 
-O R vem **ativado por padrão** em campos de texto normais.
+The R feature is **enabled by default** for normal prose fields.
 
-Para ligar ou desligar:
+To turn it on or off:
 
-1. Abra as configurações do Teclador.
-2. Vá em **Correção de texto → Correções**.
-3. Alterne **“Adicionar R no final das palavras (brincadeira)”**.
+1. Open the Teclador settings.
+2. Go to **Text correction → Corrections**.
+3. Toggle **“Add R to every word (joke)”**.
 
-## Instalação
+## Installation
 
-Baixe o APK mais recente nas [releases](../../releases) ou compile localmente.
+Download the latest APK from the [releases](../../releases) page or build it locally.
 
-Requisitos para compilar:
+Build requirements:
 
 - JDK 21
 - Android SDK 37
@@ -47,27 +47,27 @@ Requisitos para compilar:
 - Android SDK Build-Tools 37.0.0
 
 ```bash
-export JAVA_HOME=/caminho/para/jdk-21
-export ANDROID_HOME=/caminho/para/android-sdk
+export JAVA_HOME=/path/to/jdk-21
+export ANDROID_HOME=/path/to/android-sdk
 
 ./gradlew :app:assembleDebug
 ```
 
-O APK será gerado em:
+The APK is generated at:
 
 ```
-app/build/outputs/apk/debug/Teclador_<versão>-debug.apk
+app/build/outputs/apk/debug/Teclador_<version>-debug.apk
 ```
 
-Para instalar em um dispositivo conectado:
+To install it on a connected device:
 
 ```bash
 adb install -r app/build/outputs/apk/debug/Teclador_*-debug.apk
 ```
 
-Depois ative o **Teclador** em *Configurações → Sistema → Teclados → Gerenciar teclados*.
+Then enable **Teclador** in *Settings → System → Keyboards → Manage keyboards*.
 
-## Testes
+## Tests
 
 ```bash
 ./gradlew :app:testDebugUnitTest \
@@ -75,17 +75,17 @@ Depois ative o **Teclador** em *Configurações → Sistema → Teclados → Ger
   --tests 'helium314.keyboard.latin.InputLogicTest.appendR*'
 ```
 
-A suíte completa contém alguns testes conhecidos que falham no build `debug` (eles são pulados no build `runTests`), além de testes de links externos.
+The full suite contains a few tests that are known to fail in the `debug` build (they are skipped in the `runTests` build), plus tests that check external links.
 
-## Licença
+## License
 
-Este projeto é distribuído sob a **GNU General Public License v3.0**, a mesma licença do HeliBoard. Veja [LICENSE](LICENSE).
+This project is distributed under the **GNU General Public License v3.0**, the same license as HeliBoard. See [LICENSE](LICENSE).
 
-Como o HeliBoard é baseado no teclado AOSP (Apache 2.0), o arquivo [LICENSE-Apache-2.0](LICENSE-Apache-2.0) também é mantido. O ícone usa [Creative Commons BY-SA 4.0](LICENSE-CC-BY-SA-4.0).
+Because HeliBoard is based on the Apache 2.0 licensed AOSP keyboard, the [LICENSE-Apache-2.0](LICENSE-Apache-2.0) file is also kept. The icon is licensed under [Creative Commons BY-SA 4.0](LICENSE-CC-BY-SA-4.0).
 
-## Créditos
+## Credits
 
-Todo o mérito do teclado original é do projeto HeliBoard e de seus contribuidores:
+All credit for the original keyboard goes to the HeliBoard project and its contributors:
 
 - [HeliBoard](https://github.com/HeliBorg/HeliBoard)
 - [OpenBoard](https://github.com/openboard-team/openboard)
@@ -94,5 +94,5 @@ Todo o mérito do teclado original é do projeto HeliBoard e de seus contribuido
 - [Simple Keyboard](https://github.com/rkkr/simple-keyboard)
 - [Indic Keyboard](https://gitlab.com/indicproject/indic-keyboard)
 - [FlorisBoard](https://github.com/florisboard/florisboard/)
-- Os [contribuidores do HeliBoard](https://github.com/HeliBorg/HeliBoard/graphs/contributors)
-- Ícone por [Fabian OvrWrt](https://github.com/FabianOvrWrt), com contribuições de [The Eclectic Dyslexic](https://github.com/the-eclectic-dyslexic)
+- [HeliBoard contributors](https://github.com/HeliBorg/HeliBoard/graphs/contributors)
+- Icon by [Fabian OvrWrt](https://github.com/FabianOvrWrt), with contributions from [The Eclectic Dyslexic](https://github.com/the-eclectic-dyslexic)
