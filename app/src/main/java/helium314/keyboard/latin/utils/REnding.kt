@@ -20,13 +20,14 @@ private const val CONSONANTS = "bcdfghjklmnpqrstvwxyzç"
  * - final "r" gets another "r" ("falar" -> "falarr");
  * - final vowels get "r" ("casa" -> "casar").
  *
- * All-uppercase words use uppercase replacements ("BEM" -> "BENHER").
+ * All-uppercase words with more than one letter use uppercase replacements ("BEM" -> "BENHER").
+ * A single-letter word is treated as capitalized, not as an acronym ("É" -> "Ér").
  */
 fun applyTo(word: String): String? {
     if (word.isEmpty() || !word.last().isLetter()) return null
     val letters = word.filter { it.isLetter() }
     if (letters.isEmpty()) return null
-    val allCaps = letters.all { it.isUpperCase() }
+    val allCaps = letters.length > 1 && letters.all { it.isUpperCase() }
     val last = word.last().lowercaseChar()
     return when {
         last == 'm' -> word.dropLast(1) + if (allCaps) "NHER" else "nher"

@@ -36,6 +36,8 @@ Simply appending R to every word creates hard-to-read results like `bemr` or `Br
 | `m` | replace `m` with `nher` | `bem` → `benher`, `também` → `tambénher`, `homem` → `homenher` |
 | other consonants (`s`, `l`, `z`, `x`, `n`, ...) | append `er` | `mas` → `maser`, `Brasil` → `Brasiler`, `feliz` → `felizer`, `parabéns` → `parabénser` |
 
+Single-letter words are treated as capitalized, not as acronyms: `É` → `Ér`, `A` → `Ar`.
+
 Words that do not end in a letter (numbers, punctuation, emoji) are left untouched. The rules live in [`REnding.kt`](app/src/main/java/helium314/keyboard/latin/utils/REnding.kt) and are easy to adjust or extend.
 
 ## Settings

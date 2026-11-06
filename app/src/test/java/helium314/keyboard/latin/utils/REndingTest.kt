@@ -22,6 +22,16 @@ class REndingTest {
     }
 
     @Test
+    fun singleLetterWordsUseLowercaseSuffix() {
+        assertEquals("ér", applyTo("é"))
+        assertEquals("Ér", applyTo("É"))
+        assertEquals("ar", applyTo("a"))
+        assertEquals("Ar", applyTo("A"))
+        assertEquals("Er", applyTo("E"))
+        assertEquals("Or", applyTo("O"))
+    }
+
+    @Test
     fun handlesFinalM() {
         assertEquals("benher", applyTo("bem"))
         assertEquals("Benher", applyTo("Bem"))
@@ -40,6 +50,15 @@ class REndingTest {
         assertEquals("hífener", applyTo("hífen"))
         assertEquals("tóraxer", applyTo("tórax"))
         assertEquals("player", applyTo("play"))
+    }
+
+    @Test
+    fun handlesPluralsAndOtherEndings() {
+        assertEquals("pãeser", applyTo("pães"))
+        assertEquals("limõeser", applyTo("limões"))
+        assertEquals("animaiser", applyTo("animais"))
+        assertEquals("tênher", applyTo("têm"))
+        assertEquals("comerr", applyTo("comer"))
     }
 
     @Test
