@@ -10,7 +10,10 @@ Examples:
 | `house.` | `houser.` |
 | `falar` | `falarr` |
 | `bem` | `benher` |
-| `Brasil` | `Brasiler` |
+| `homem` | `homer` |
+| `Brasil` | `Brasir` |
+| `possível` | `possíver` |
+| `pães` | `pãer` |
 | `CASA` | `CASAR` |
 | `Casa` | `Casar` |
 
@@ -33,10 +36,13 @@ Simply appending R to every word creates hard-to-read results like `bemr` or `Br
 | Word ending | Rule | Examples |
 | --- | --- | --- |
 | vowel or `r` | append `r` | `casa` → `casar`, `pão` → `pãor`, `falar` → `falarr` |
-| `m` | replace `m` with `nher` | `bem` → `benher`, `também` → `tambénher`, `homem` → `homenher` |
-| other consonants (`s`, `l`, `z`, `x`, `n`, ...) | append `er` | `mas` → `maser`, `Brasil` → `Brasiler`, `feliz` → `felizer`, `parabéns` → `parabénser` |
+| `l` | replace `l` with `r` | `Brasil` → `Brasir`, `possível` → `possíver`, `mal` → `mar` |
+| `s` | replace `s` with `r` (except `-ns`) | `pães` → `pãer`, `casas` → `casar`, `mas` → `mar` |
+| `-ns` | append `er` | `parabéns` → `parabénser`, `homens` → `homenser` |
+| `m` | one-vowel words get `nher`; longer words drop `m` and get `r` | `bem` → `benher`, `têm` → `tênher`, `homem` → `homer`, `falam` → `falar`, `também` → `tambér` |
+| other consonants (`z`, `x`, `n`, ...) | append `er` | `feliz` → `felizer`, `tórax` → `tóraxer`, `hífen` → `hífener` |
 
-Single-letter words are treated as capitalized, not as acronyms: `É` → `Ér`, `A` → `Ar`.
+Single-letter words are treated as capitalized, not as acronyms: `É` → `Ér`, `A` → `Ar`, `M` → `Mr`.
 
 Words that do not end in a letter (numbers, punctuation, emoji) are left untouched. The rules live in [`REnding.kt`](app/src/main/java/helium314/keyboard/latin/utils/REnding.kt) and are easy to adjust or extend.
 

@@ -301,7 +301,31 @@ class InputLogicTest {
         chainInput("Brasil")
         latinIME.onEvent(Event.createEventForCodePointFromUnknownSource(Constants.CODE_SPACE))
         handleMessages()
-        assertEquals("Brasiler ", text)
+        assertEquals("Brasir ", text)
+    }
+
+    @Test fun appendRHandlesLongNasalEnding() {
+        latinIME.prefs().edit {
+            putBoolean(Settings.PREF_AUTO_CORRECTION, false)
+            putBoolean(Settings.PREF_R_ENDING, true)
+        }
+        setText("")
+        chainInput("homem")
+        latinIME.onEvent(Event.createEventForCodePointFromUnknownSource(Constants.CODE_SPACE))
+        handleMessages()
+        assertEquals("homer ", text)
+    }
+
+    @Test fun appendRHandlesPluralEnding() {
+        latinIME.prefs().edit {
+            putBoolean(Settings.PREF_AUTO_CORRECTION, false)
+            putBoolean(Settings.PREF_R_ENDING, true)
+        }
+        setText("")
+        chainInput("pães")
+        latinIME.onEvent(Event.createEventForCodePointFromUnknownSource(Constants.CODE_SPACE))
+        handleMessages()
+        assertEquals("pãer ", text)
     }
 
     @Test fun autospaceButWithTextAfter() {
